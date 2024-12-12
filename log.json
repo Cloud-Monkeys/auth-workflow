@@ -1,0 +1,10 @@
+[
+  {
+    "timestamp": "2024-12-12T16:55:01.454Z",
+    "method": "GET",
+    "url": "/",
+    "traceId": "0938d7bd-5f97-49e8-b549-02e2021d41e9",
+    "spanId": "2a42f3f0-67da-49ee-b5d3-c12e42e8e039",
+    "statusCode": 404
+  }
+]

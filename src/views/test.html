@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auth Workflow Test</title>
+    <style>
+        .container { margin: 20px; }
+        .response { margin-top: 10px; padding: 10px; background-color: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Test</h2>
+        <form id="registerForm">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Register</button>
+        </form>
+        <div id="registerResponse" class="response"></div>
+
+        <h2>Login Test</h2>
+        <form id="loginForm">
+            <input type="text" name="username" placeholder="Username" required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <div id="loginResponse" class="response"></div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData))
+                });
+                const result = await response.json();
+                document.getElementById('registerResponse').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('registerResponse').textContent = error.message;
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(Object.fromEntries(formData))
+                });
+                const result = await response.json();
+                document.getElementById('loginResponse').textContent = JSON.stringify(result, null, 2);
+            } catch (error) {
+                document.getElementById('loginResponse').textContent = error.message;
+            }
+        });
+    </script>
+</body>
+</html>
